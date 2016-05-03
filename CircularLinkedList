@@ -1,0 +1,28 @@
+// Incomplete Circular Linked List
+function Node(element) {
+	this.element = element ;
+	this.next = null ;
+}
+
+function CLList() {
+	this.head = new Node("head") ;
+	this.head.next = this.head ;
+	this.find = find ;
+	this.insert = insert ;
+	this.display = display ;
+	this.findPrevious = findPrevious ;
+	this.remove = remove ;
+}
+
+// doubly linked list display() will not work. that function will not stop.
+// condition of while loop needs to change so that head element is tested
+// for and loop will stop when it gets to the head
+
+function display() {
+	var currNode = this.head ;
+	while (!(currNode.next == null) &&
+		!(currNode.next.element == "head")) {
+		print(currNode.next.element) ;
+		currNode = currNode.next ;
+	}
+}
