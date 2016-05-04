@@ -48,7 +48,7 @@ function put(data) {
 // function computes hash value by summing the ASCII value of each name
 // using charCodeAt(), to return character's ASCII value
 // However, if two elements hash to same value, only one of them is
-// stored.
+// stored, example of collision.
 function simpleHash(data) {
 	var total = 0 ;
 	for (var i = 0; i < data.length; ++i) {
