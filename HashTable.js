@@ -21,28 +21,27 @@
 // displaying the distribution of data, and other utility functions
 
 function HashTable() {
-	this.table = new Array(137) ;
-	this.simpleHash = simpleHash ;
-	this.betterHash = betterHash ;
-	this.showDistro = showDistro ;
-	this.put = put ;
-	this.putBetterHashFunction = putBetterHashFunction;
-	// this.get = get ;
+	this.table = new Array(137);
+	this.simpleHash = simpleHash;
+	this.showDistro = showDistro;
+	this.put = put;
+	//this.get = get;
 }
 
 // receives the array index value from simpleHash() and stores element
 // in that position
 function put(data) {
-	var pos = this.simpleHash(data) ;
-	this.table[pos] = data ;
+	var pos = this.simpleHash(data);
+	this.table[pos] = data;
 }
+
 
 // receives the array index value from betterHash() and stores element
 // in that position
-function putBetterHashFunction(data) {
-	var pos = this.betterHash(data) ;
-	this.table[pos] = data ;
-}
+// function putBetterHashFunction(data) {
+// 	var pos = this.betterHash(data) ;
+// 	this.table[pos] = data ;
+// }
 
 
 
@@ -61,13 +60,13 @@ function putBetterHashFunction(data) {
 // However, if two elements hash to same value, only one of them is
 // stored, example of collision.
 function simpleHash(data) {
-	var total = 0 ;
+	var total = 0;
 	for (var i = 0; i < data.length; ++i) {
-		total += data.charCodeAt(i) ;
+		total += data.charCodeAt(i);
 	}
-	print("Hash value: " + data + " -> " + total) ;
-	return total % this.table.length ;
+	return total % this.table.length;
 }
+
 
 
 // betterHash() - avoid hashing collisions by computing a better hash
@@ -76,25 +75,26 @@ function simpleHash(data) {
 // Still sum up ASCII values of the characters, then multiply total by a
 // prime constant.  
 // Chosen 37 as the prime constant
-function betterHash(string) {
-	const H = 37 ;
-	var total = 0 ;
-	for (var i = 0; i < string.length; ++i) {
-		total += H * total + string.charCodeAt(i) ;
-	}
-	total = total % this.table.length ;
-	if (total < 0) {
-		total += this.table.length - 1 ;
-	}
-
-	return parseInt(total) ;
-}
+//function betterHash(string) {
+//	const H = 37 ;
+//	var total = 0 ;
+//	for (var i = 0; i < string.length; ++i) {
+//		total += H * total + string.charCodeAt(i) ;
+//	}
+//	total = total % this.table.length ;
+//	if (total < 0) {
+//		total += this.table.length - 1 ;
+//	}
+//
+//	return parseInt(total) ;
+//}
 
 function showDistro() {
-	var n = 0 ;
+	var n = 0;
 	for (var i = 0; i < this.table.length; ++i) {
 		if (this.table[i] != undefined) {
-			print(i + ": " + this.table[i]) ;
+			print(i + ": " + this.table[i]);
 		}
 	}
 }
+
