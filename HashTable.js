@@ -1,0 +1,61 @@
+// Hashing - common technique for storing data in such a way that data
+// can be inserted and retrieved very quickly.
+// uses a data structure called hash table.
+// they provide fast insertion, deletion, and retrieval, but
+// perform poorly for operations that involve searching, finding the
+// minimum and maximum values in a data set.
+
+// hash table structure designed around an array.
+// each data element is stored in array based on associated data element
+// called the key.
+// To store a piece of data in hash table, key is mapped to a number in
+// range of 0 through hash table size, using hash function.
+
+// hash function tries to distribute the keys as evenly as possibly
+// among the elements of the array.
+// it is possible for two keys to hash to the same value, called a
+// collision.
+
+// HashTable class includes functions for computing hash values,
+// inserting data into hash table, retrieving data from hash table,
+// displaying the distribution of data, and other utility functions
+
+function HashTable() {
+	this.table = new Array(137) ;
+	this.simpleHash = simpleHash ;
+	this.showDistro = showDistro ;
+	this.put = put ;
+	// this.get = get ;
+}
+
+function put(data) {
+	var pos = this.simpleHash(data) ;
+	this.table[pos] = data ;
+}
+
+// choice of hash function depends on data type of key.  if key is
+// integer, simplest hash function is to return the key modulo the size
+// of array.  
+// may not be useful when keys all end in 0, and array size is 10.
+// that's why array size should always be a prime number, such as 137
+// if keys are random integers, then the hash function should more
+// evenly distribute keys.  This type of hashing known as modular
+// hashing.
+
+// simple hash function
+function simpleHash(data) {
+	var total = 0 ;
+	for (var i = 0; i < data.length; ++i) {
+		total += data.charCodeAt(i) ;
+	}
+	return total % this.table.length ;
+}
+
+function showDistro() {
+	var n = 0 ;
+	for (var i = 0; i < this.table.length; ++i) {
+		if (this.table[i] != undefined) {
+			print(i + ": " + this.table[i]) ;
+		}
+	}
+}
