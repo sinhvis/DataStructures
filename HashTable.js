@@ -47,11 +47,14 @@ function put(data) {
 // simple hash function
 // function computes hash value by summing the ASCII value of each name
 // using charCodeAt(), to return character's ASCII value
+// However, if two elements hash to same value, only one of them is
+// stored.
 function simpleHash(data) {
 	var total = 0 ;
 	for (var i = 0; i < data.length; ++i) {
 		total += data.charCodeAt(i) ;
 	}
+	print("Hash value: " + data + " -> " + total) ;
 	return total % this.table.length ;
 }
 
