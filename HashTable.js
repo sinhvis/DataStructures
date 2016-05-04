@@ -32,8 +32,8 @@ function HashTable() {
 // receives the array index value from simpleHash() and stores element
 // in that position
 function put(data) {
-	// var pos = this.simpleHash(data);
-	var pos = this.betterHash(data) ;
+	var pos = this.simpleHash(data);
+	// var pos = this.betterHash(data) ;
 	this.table[pos] = data;
 }
 
