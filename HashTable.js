@@ -23,8 +23,10 @@
 function HashTable() {
 	this.table = new Array(137) ;
 	this.simpleHash = simpleHash ;
+	this.betterHash = betterHash ;
 	this.showDistro = showDistro ;
 	this.put = put ;
+	this.putBetterHashFunction = putBetterHashFunction;
 	// this.get = get ;
 }
 
@@ -34,6 +36,15 @@ function put(data) {
 	var pos = this.simpleHash(data) ;
 	this.table[pos] = data ;
 }
+
+// receives the array index value from betterHash() and stores element
+// in that position
+function putBetterHashFunction(data) {
+	var pos = this.betterHash(data) ;
+	this.table[pos] = data ;
+}
+
+
 
 // choice of hash function depends on data type of key.  if key is
 // integer, simplest hash function is to return the key modulo the size
@@ -56,6 +67,27 @@ function simpleHash(data) {
 	}
 	print("Hash value: " + data + " -> " + total) ;
 	return total % this.table.length ;
+}
+
+
+// betterHash() - avoid hashing collisions by computing a better hash
+// value.  
+// Algorithm known as Horner's method.
+// Still sum up ASCII values of the characters, then multiply total by a
+// prime constant.  
+// Chosen 37 as the prime constant
+function betterHash(string) {
+	const H = 37 ;
+	var total = 0 ;
+	for (var i = 0; i < string.length; ++i) {
+		total += H * total + string.charCodeAt(i) ;
+	}
+	total = total % this.table.length ;
+	if (total < 0) {
+		total += this.table.length - 1 ;
+	}
+
+	return parseInt(total) ;
 }
 
 function showDistro() {
