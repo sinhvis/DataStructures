@@ -28,6 +28,8 @@ function HashTable() {
 	// this.get = get ;
 }
 
+// receives the array index value from simpleHash() and stores element
+// in that position
 function put(data) {
 	var pos = this.simpleHash(data) ;
 	this.table[pos] = data ;
@@ -43,6 +45,8 @@ function put(data) {
 // hashing.
 
 // simple hash function
+// function computes hash value by summing the ASCII value of each name
+// using charCodeAt(), to return character's ASCII value
 function simpleHash(data) {
 	var total = 0 ;
 	for (var i = 0; i < data.length; ++i) {
