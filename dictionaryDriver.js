@@ -6,5 +6,7 @@ pbook.add("Cynthia", "456") ;
 print("Number of entries: " + pbook.count()) ;
 print("David's extension: " + pbook.find("David")) ;
 pbook.showAll() ;
+print("Sorted Order") ;
+pbook.showAllSort() ;
 pbook.clear() ;
 print("Number of entries: " + pbook.count()) ;

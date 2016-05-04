@@ -12,6 +12,7 @@ function Dictionary() {
 	this.find = find ;
 	this.remove = remove ;
 	this.showAll = showAll ;
+	this.showAllSort = showAllSort ;
 	this.count = count ;
 	this.clear = clear ;
 }
@@ -42,11 +43,25 @@ function remove(key) {
 //}
 
 function showAll() {
-	for(var key in this.datastore) {
-		print(key + " ->  " + this.datastore[key]);
+	for(var key in (this.datastore)) {
+		print(key + " ->  " + this.datastore[key]) ;
+	}
+
+	for (var key in Object.keys(this.datastore)) {
+		print(key + " -> " + this.datastore[key]) ;
 	}
 }
 
+function showAllSort() {
+	keys = Object.keys(this.datastore).sort() ;
+	c = print(keys[0]) ;
+	print(this.datastore[c]) ;
+	for(var key in keys) {
+		print(key + " ->  " + this.datastore[key]) ;
+	}
+}
+
+// Need this because length does not work with string keys
 function count() {
 	var n = 0 ;
 	for (var key in this.datastore) {
