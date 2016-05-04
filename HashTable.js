@@ -23,6 +23,7 @@
 function HashTable() {
 	this.table = new Array(137);
 	this.simpleHash = simpleHash;
+	this.betterHash = betterHash ;
 	this.showDistro = showDistro;
 	this.put = put;
 	//this.get = get;
@@ -31,7 +32,8 @@ function HashTable() {
 // receives the array index value from simpleHash() and stores element
 // in that position
 function put(data) {
-	var pos = this.simpleHash(data);
+	// var pos = this.simpleHash(data);
+	var pos = this.betterHash(data) ;
 	this.table[pos] = data;
 }
 
@@ -64,31 +66,10 @@ function simpleHash(data) {
 	for (var i = 0; i < data.length; ++i) {
 		total += data.charCodeAt(i);
 	}
-	print("Hash value: " + data + " -> " + total) ;
 	return total % this.table.length;
 }
 
 
-
-// betterHash() - avoid hashing collisions by computing a better hash
-// value.  
-// Algorithm known as Horner's method.
-// Still sum up ASCII values of the characters, then multiply total by a
-// prime constant.  
-// Chosen 37 as the prime constant
-//function betterHash(string) {
-//	const H = 37 ;
-//	var total = 0 ;
-//	for (var i = 0; i < string.length; ++i) {
-//		total += H * total + string.charCodeAt(i) ;
-//	}
-//	total = total % this.table.length ;
-//	if (total < 0) {
-//		total += this.table.length - 1 ;
-//	}
-//
-//	return parseInt(total) ;
-//}
 
 function showDistro() {
 	var n = 0;
@@ -99,3 +80,22 @@ function showDistro() {
 	}
 }
 
+// betterHash() - avoid hashing collisions by computing a better hash
+// value.  
+// Algorithm known as Horner's method.
+// Still sum up ASCII values of the characters, then multiply total by a
+// prime constant.  
+// Chosen 37 as the prime constant
+
+function betterHash(string) {
+	const H = 37;
+	var total = 0;
+	for (var i = 0; i < string.length; ++i) {
+		total += H * total + string.charCodeAt(i);
+	}
+	total = total % this.table.length;
+	if (total < 0) {
+		total += this.table.length-1;
+	}
+	return parseInt(total);
+}
