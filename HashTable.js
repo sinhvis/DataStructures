@@ -26,15 +26,19 @@ function HashTable() {
 	this.betterHash = betterHash ;
 	this.showDistro = showDistro;
 	this.put = put;
-	//this.get = get;
+	this.get = get;
 }
 
 // receives the array index value from simpleHash() and stores element
 // in that position
-function put(data) {
+function put(key, data) {
 	// var pos = this.simpleHash(data);
-	var pos = this.betterHash(data) ;
+	var pos = this.betterHash(key) ;
 	this.table[pos] = data;
+}
+
+function get(key) {
+	return this.table[this.betterHash(key)] ;
 }
 
 
