@@ -23,6 +23,8 @@ function Set() {
 	this.add = add ;
 	this.remove = remove ;
 	this.show = show ;
+	this.contains = contains;
+	this.union = union ;
 }
 
 // add() - since a set can only contain unique members, must make sure
@@ -50,6 +52,35 @@ function remove(data) {
 	}
 }
 
+
+// union() - builds a new set by adding all the members of first set.
+// then checks each member of the second set to see whether is already a
+// member of the first set. if it is, the member is skipped over, if
+// not, member is added to new set.
+// contains() - helper for union() - looks to see if specified member is
+// part of set
+
+function contains(data) {
+	if (this.dataStore.indexOf(data) > -1) {
+		return true ;
+	}
+	else {
+		return false ;
+	}
+}
+
+function union(set) {
+	var tempSet = new Set() ;
+	for (var i = 0; i < this.dataStore.length; ++i) {
+		tempSet.add(this.dataStore[i]) ;
+	}
+	for (var i = 0; i < set.dataStore.length; ++i) {
+		if (!tempSet.contains(set.dataStore[i])) {
+			tempSet.dataStore.push(set.dataStore[i]) ;
+		}
+	}
+	return tempSet ;
+}
 // see members of set
 function show() {
 	return this.dataStore ;
