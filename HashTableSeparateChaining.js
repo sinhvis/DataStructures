@@ -1,24 +1,12 @@
-// Hashing - common technique for storing data in such a way that data
-// can be inserted and retrieved very quickly.
-// uses a data structure called hash table.
-// they provide fast insertion, deletion, and retrieval, but
-// perform poorly for operations that involve searching, finding the
-// minimum and maximum values in a data set.
-
-// hash table structure designed around an array.
-// each data element is stored in array based on associated data element
-// called the key.
-// To store a piece of data in hash table, key is mapped to a number in
-// range of 0 through hash table size, using hash function.
-
-// hash function tries to distribute the keys as evenly as possibly
-// among the elements of the array.
-// it is possible for two keys to hash to the same value, called a
-// collision.
-
-// HashTable class includes functions for computing hash values,
-// inserting data into hash table, retrieving data from hash table,
-// displaying the distribution of data, and other utility functions
+// Separate Chaining technique for collision resolution
+// When collision occurs, and need to store the key at the generated
+// index, but it's impossible to store more that one piece of data in an
+// array element.
+// Seperate chaining technique where each array element of a hash table
+// stores another data structure, such as another array, which is then
+// used to store keys.
+// If two keys generate same hash value, each key can be stored in a
+// different position of the secondary array.
 
 function HashTable() {
 	this.table = new Array(137);
@@ -27,19 +15,50 @@ function HashTable() {
 	this.showDistro = showDistro;
 	this.put = put;
 	this.get = get;
+	this.buildChains = buildChains ;
 }
 
-// receives the array index value from simpleHash() and stores element
-// in that position
-function put(data) {
-	var pos = this.betterHash(data) ;
-	this.table[pos] = data;
+// To implement separate chaining, after array to store the hashed keys
+// is created, call function that assigns empty array to each array
+// element of hash table.
+// buildChains() creates the second array (also called as chain)
+function buildChains() {
+	for (var i = 0; i < this.table.length; ++i) {
+		this.table[i] = new Array() ;
+	}
 }
+
+function put(key, data) {
+	var pos = this.betterHash(key);
+	var index = 0;
+	if (this.table[pos][index] == undefined) {
+		this.table[pos][index+1] = data;
+	}
+	++index;
+	else {
+		while (this.table[pos][index] != undefined) {
+			++index;
+		}
+		this.table[pos][index] = data;
+	}
+}
+
 
 function get(key) {
-	return this.table[this.betterHash(key)] ;
+	var index = 0;
+	var hash = this.betterHash(key);
+	if (this.table[pos][index] = key) {
+		return this.table[pos][index+1];
+	}
+	index += 2;
+	else {
+		while (this.table[pos][index] != key) {
+			index += 2;
+		}
+		return this.table[pos][index+1];
+	}
+	return undefined;
 }
-
 
 // receives the array index value from betterHash() and stores element
 // in that position
@@ -74,22 +93,17 @@ function simpleHash(data) {
 
 
 
+// to properly display the distribution after hashing with separate
+// chaining, need to modify showDistro() to recognize that hash table is
+// now a multidimensional array
 function showDistro() {
 	var n = 0;
 	for (var i = 0; i < this.table.length; ++i) {
 		if (this.table[i] != undefined) {
 			print(i + ": " + this.table[i]);
 		}
-		// print(i + ": " + this.table[i]) ;
 	}
 }
-
-// betterHash() - avoid hashing collisions by computing a better hash
-// value.  
-// Algorithm known as Horner's method.
-// Still sum up ASCII values of the characters, then multiply total by a
-// prime constant.  
-// Chosen 37 as the prime constant
 
 function betterHash(string) {
 	const H = 37;
