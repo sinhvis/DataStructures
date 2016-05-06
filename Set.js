@@ -25,6 +25,7 @@ function Set() {
 	this.show = show ;
 	this.contains = contains;
 	this.union = union ;
+	this.intersect = intersect ;
 }
 
 // add() - since a set can only contain unique members, must make sure
@@ -50,6 +51,12 @@ function remove(data) {
 	else {
 		return false ;
 	}
+}
+
+
+// see members of set
+function show() {
+	return this.dataStore ;
 }
 
 
@@ -81,7 +88,16 @@ function union(set) {
 	}
 	return tempSet ;
 }
-// see members of set
-function show() {
-	return this.dataStore ;
+
+// intersect() - for Set intersection
+// Each member of the first set is found to be a member of the second
+// set, it is added to a new set, which is the return value
+function intersect(set) {
+	var tempSet = new Set() ;
+	for(var i = 0; i < this.dataStore.length; ++i) {
+		if (set.contains(this.dataStore[i])) {
+			tempSet.add(this.dataStore[i]) ;
+		}
+	}
+	return tempSet ;
 }

@@ -44,11 +44,40 @@ cis.add("Clayton") ;
 cis.add("Jennifer") ;
 cis.add("Raymond") ;
 
+print('Contents of first set: ') ;
+print(cis.show()) ;
+
 var dmp = new Set() ;
 dmp.add("Raymond") ;
 dmp.add("Cynthia") ;
 dmp.add("Jonathan") ;
+print('Contents of second set: ') ;
+print(dmp.show()) ;
 
 var it = new Set() ;
 it = cis.union(dmp) ;
+print('After union: ') ;
 print(it.show()) ;
+
+print('Press Enter for intersect') ;
+readline() ;
+
+load("set.js") ;
+var cis = new Set() ;
+cis.add("Mike") ;
+cis.add("Clayton") ;
+cis.add("Jennifer") ;
+cis.add("Raymond") ;
+print("First set: ") ;
+print(cis.show()) ;
+
+var dmp = new Set() ;
+dmp.add("Raymond") ;
+dmp.add("Cynthia") ;
+dmp.add("Bryan") ;
+print("Second set:") ;
+print(dmp.show()) ;
+
+var inter = cis.intersect(dmp) ;
+print("After intersect(dmp)") ;
+print (inter.show()) ;
