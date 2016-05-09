@@ -28,6 +28,7 @@ function Set() {
 	this.intersect = intersect ;
 	this.subset = subset ;
 	this.size = size ;
+	this.difference = difference ;
 }
 
 // add() - since a set can only contain unique members, must make sure
@@ -57,8 +58,17 @@ function remove(data) {
 
 
 // see members of set
+//function show() {
+//	return this.dataStore ;
+//}
+
+// show() - returns a well-formatted string of elements of the set
 function show() {
-	return this.dataStore ;
+	var retString = "" ;
+	for (var i = 0; i < this.dataStore.length; ++i) {
+		retString += this.dataStore[i] + ", " ;
+	}
+	return retString ;
 }
 
 
@@ -147,4 +157,16 @@ function subset(set) {
 // sets match.
 function size() {
 	return this.dataStore.length ;
+}
+
+// difference() - returns a set that contains  those members of the
+// first set that are not in the second set.
+function difference(set) {
+	var tempSet = new Set() ;
+	for (var i = 0; i < this.dataStore.length; ++i) {
+		if (!set.contains(this.dataStore[i])) {
+			tempSet.add(this.dataStore[i]) ;
+		}
+	}
+	return tempSet ;
 }
