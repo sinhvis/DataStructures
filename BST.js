@@ -94,6 +94,14 @@ function preOrder(node) {
 	}
 }
 
+function postOrder(node) {
+	if (!(node == null)) {
+		postOrder(node.left) ;
+		postOrder(node.right) ;
+		putstr(node.show() + " ") ;
+	}
+}
+
 
 print("Driver for BST") ;
 var nums = new BST() ;
@@ -121,4 +129,20 @@ nums.insert(99) ;
 nums.insert(22) ;
 print("PreOrder traversal: ") ;
 preOrder(nums.root) ;
+
+
+print ("\n\nPress ENTER for postOrder()") ;
+readline() ;
+var nums = new BST() ;
+
+nums.insert(23) ;
+nums.insert(45) ;
+nums.insert(16) ;
+nums.insert(37) ;
+nums.insert(3) ;
+nums.insert(99) ;
+nums.insert(22) ;
+print("PostOrder traversal: ") ;
+postOrder(nums.root) ;
+
 
