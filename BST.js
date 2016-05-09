@@ -45,7 +45,8 @@ function show() {
 function BST() {
 	this.root = null ;
 	this.insert = insert ;
-	// this.inOrder = inOrder ;
+	this.inOrder = inOrder ;
+	this.preOrder = preOrder ;
 }
 
 function insert(data) {
@@ -85,6 +86,14 @@ function inOrder(node) {
 	}
 }
 
+function preOrder(node) {
+	if (!(node == null)) {
+		putstr(node.show() + " ") ;
+		preOrder(node.left) ;
+		preOrder(node.right) ;
+	}
+}
+
 
 print("Driver for BST") ;
 var nums = new BST() ;
@@ -98,4 +107,18 @@ nums.insert(22) ;
 print("Inorder traversal: ") ;
 inOrder(nums.root) ;
 
+
+print("\n\nPress ENTER for preOrder()") ;
+readline() ;
+var nums = new BST() ;
+
+nums.insert(23) ;
+nums.insert(45) ;
+nums.insert(16) ;
+nums.insert(37) ;
+nums.insert(3) ;
+nums.insert(99) ;
+nums.insert(22) ;
+print("PreOrder traversal: ") ;
+preOrder(nums.root) ;
 
