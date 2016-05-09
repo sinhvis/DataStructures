@@ -26,6 +26,8 @@ function Set() {
 	this.contains = contains;
 	this.union = union ;
 	this.intersect = intersect ;
+	this.subset = subset ;
+	this.size = size ;
 }
 
 // add() - since a set can only contain unique members, must make sure
@@ -100,4 +102,49 @@ function intersect(set) {
 		}
 	}
 	return tempSet ;
+}
+
+
+// subset() - first checks if proposed subset's length is less than the
+// larger set being compared. if subset length is greater, then cannot
+// be subset. 
+// if smaller, check if each member of subset is member of larger set.
+// if any member is not in larger set, return false and stop.
+// if gets to end of larger set, then return true.
+//function subset(set) {
+//	if (this.size() > set.size()) {
+//		return false ;
+//	}
+//	else {
+//		for (var member in this.dataStore) {
+//			// DEBUG
+//			print ("dmp member: " + member) ;
+//			if (!set.contains(member)) {
+//				return false ;
+//			}
+//		}
+//	}
+//	return true ;
+//}
+
+// Re-written version of subset because for var in is not working.
+function subset(set) {
+	if (this.size() > set.size()) {
+		return false ;
+	}
+	else {
+		for (var i = 0; i < this.dataStore.length; ++i) {
+			if(!set.contains(this.dataStore[i])) {
+				return false ;
+			}
+		}
+	}
+	return true ;
+}
+
+
+// size() - needed by subset() before checking to see if each element of
+// sets match.
+function size() {
+	return this.dataStore.length ;
 }

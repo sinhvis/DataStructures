@@ -81,3 +81,65 @@ print(dmp.show()) ;
 var inter = cis.intersect(dmp) ;
 print("After intersect(dmp)") ;
 print (inter.show()) ;
+
+
+print("\n\nPress Enter for subset()") ;
+readline() ;
+load("set.js") ;
+var it = new Set() ;
+it.add("Cynthia") ;
+it.add("Clayton") ;
+it.add("Jennifer") ;
+it.add("Danny") ;
+it.add("Jonathan") ;
+it.add("Terrill") ;
+it.add("Raymond") ;
+it.add("Mike") ;
+print("first set: ") ;
+print (it.show()) ;
+
+var dmp = new Set() ;
+dmp.add("Cynthia") ;
+dmp.add("Raymond") ;
+dmp.add("Jonathan") ;
+print ("second set") ;
+print(dmp.show()) ;
+
+if (dmp.subset(it)) {
+	print("dmp is a subset of it.") ;
+}
+else {
+	print("dmp is not a subset of it.") ;
+}
+
+print("Press enter for another example of subset()")
+readline() ;
+load("set.js") ;
+var it = new Set() ;
+it.add("Cynthia") ;
+it.add("Clayton") ;
+it.add("Jennifer") ;
+it.add("Danny") ;
+it.add("Jonathan") ;
+it.add("Terrill") ;
+it.add("Raymond") ;
+it.add("Mike") ;
+print("first set: ") ;
+print (it.show()) ;
+
+var dmp = new Set() ;
+dmp.add("Cynthia") ;
+dmp.add("Raymond") ;
+dmp.add("Jonathan") ;
+dmp.add("Shirley") ;
+print ("second set") ;
+print(dmp.show()) ;
+
+if (dmp.subset(it)) {
+	print("dmp is a subset of it.") ;
+}
+else {
+	print("dmp is not a subset of it.") ;
+}
+
+
